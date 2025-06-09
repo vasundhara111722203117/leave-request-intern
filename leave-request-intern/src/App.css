@@ -1,0 +1,60 @@
+/* Reset some default browser styles */
+body, html, #root {
+  height: 100%;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  background-color: #f9fafb;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Scrollbar styling for webkit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Override MUI table cell to have vertical alignment middle */
+.MuiTableCell-root {
+  vertical-align: middle;
+}
+
+/* Button hover effect consistent across */
+.MuiButton-root:hover {
+  filter: brightness(0.9);
+  transition: filter 0.2s ease;
+}
+
+/* Paper elevation overrides for a lighter shadow if needed */
+.MuiPaper-elevation3 {
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12);
+}
+
+/* Responsive container max-width override (optional) */
+.MuiContainer-root {
+  max-width: 1024px;
+}
+
+/* Link style reset */
+a {
+  text-decoration: none;
+  color: inherit;
+}
