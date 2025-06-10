@@ -110,7 +110,7 @@ const TabsHeaderWithControls = ({ filter, setFilter }) => {
             width: 36,
             height: 36,
             '&:hover': {
-              backgroundColor: '#000000',
+              backgroundColor: '#f0f0f0',
             },
           }}
         >

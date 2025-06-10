@@ -25,7 +25,12 @@ const App = () => {
         }}
       >
         {/* ✅ Summary section */}
-        <SummaryCards />
+        
+        <Box sx={{ mb: 3 }}>
+  <SummaryCards />
+</Box>
+
+
 
         {/* 👇 Tabs + Search + Month Dropdown */}
         <TabsHeaderWithControls filter={filter} setFilter={setFilter} />
