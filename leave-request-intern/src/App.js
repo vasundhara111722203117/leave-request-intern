@@ -1,27 +1,39 @@
-
 import React, { useState } from 'react';
+import { Box } from '@mui/material';
 
-import { Box, Container } from '@mui/material';
-import Header from './components/header/header';
+import Sidebar from './components/Sidebar/Sidebar';
 import SummaryCards from './components/SummaryCards/SummaryCards';
-import TabsFilter from './components/TabsFilter/TabsFilter';
 import LeaveTable from './components/LeaveTable/LeaveTable';
+import TabsHeaderWithControls from './components/TabsHeaderWithControls/TabsHeaderWithControls';
 
-
-import leaveData from './leavedata/leavedata';
+import leaveData from './data/leavedata';
 
 const App = () => {
   const [filter, setFilter] = useState('All');
 
   return (
-    <Container maxWidth="xl" sx={{ py: 4 }}>
-      <Header />
-      <Box sx={{ my: 3 }}>
-        <SummaryCards data={leaveData} />
+    <Box sx={{ display: 'flex' }}>
+      <Sidebar />
+
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          p: 3,
+          backgroundColor: '#f5f6fa',
+          minHeight: '100vh',
+        }}
+      >
+        {/* ✅ Summary section */}
+        <SummaryCards />
+
+        {/* 👇 Tabs + Search + Month Dropdown */}
+        <TabsHeaderWithControls filter={filter} setFilter={setFilter} />
+
+        {/* 👇 Leave request table */}
+        <LeaveTable filter={filter} data={leaveData} />
       </Box>
-      <TabsFilter filter={filter} setFilter={setFilter} />
-      <LeaveTable filter={filter} data={leaveData} />
-    </Container>
+    </Box>
   );
 };
 

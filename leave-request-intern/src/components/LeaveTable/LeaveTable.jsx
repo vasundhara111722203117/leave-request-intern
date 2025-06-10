@@ -9,6 +9,12 @@ const statusColors = {
   Rejected: 'error',
 };
 
+const borderColors = {
+  Pending: '#ed6c02',   // warning
+  Approved: '#2e7d32',  // success
+  Rejected: '#d32f2f',  // error
+};
+
 const LeaveTable = ({ filter, data }) => {
   const filtered = filter === 'All' ? data : data.filter(d => d.status === filter);
 
@@ -17,12 +23,18 @@ const LeaveTable = ({ filter, data }) => {
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell>Leave Type</TableCell>
-            <TableCell>Leave Time</TableCell>
-            <TableCell>Half Leave Type</TableCell>
-            <TableCell>From</TableCell>
-            <TableCell>To</TableCell>
-            <TableCell>Status</TableCell>
+            {['Leave Type', 'Leave Time', 'Half Leave Type', 'From', 'To', 'Status'].map((heading, index) => (
+              <TableCell
+                key={index}
+                sx={{
+                  fontWeight: 'bold',
+                  color: 'black',
+                  backgroundColor: '#f5f5f5', // light gray background to highlight
+                }}
+              >
+                {heading}
+              </TableCell>
+            ))}
           </TableRow>
         </TableHead>
         <TableBody>
@@ -34,7 +46,15 @@ const LeaveTable = ({ filter, data }) => {
               <TableCell>{row.from}</TableCell>
               <TableCell>{row.to}</TableCell>
               <TableCell>
-                <Chip label={row.status} color={statusColors[row.status]} />
+                <Chip
+                  label={row.status}
+                  color={statusColors[row.status]}
+                  sx={{
+                    border: `3px solid ${borderColors[row.status]}`,
+                    borderRadius: '8px',
+                    fontWeight: 'bold',
+                  }}
+                />
               </TableCell>
             </TableRow>
           ))}
