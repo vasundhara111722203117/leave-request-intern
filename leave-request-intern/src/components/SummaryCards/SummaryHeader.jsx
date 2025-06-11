@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Typography, Button } from '@mui/material';
-import DownloadIcon from '@mui/icons-material/Download';
+import AssessmentOutlinedIcon from '@mui/icons-material/AssessmentOutlined'; // import the correct icon
 
 const SummaryHeader = () => {
   return (
@@ -8,31 +8,32 @@ const SummaryHeader = () => {
       <Typography variant="h6" fontWeight="bold">
         Leave Requests
       </Typography>
+
       <Button
-  variant="contained"
-  sx={{
-    backgroundColor: 'white',
-    color: 'black',
-    borderRadius: '10px',
-    textTransform: 'none',
-    boxShadow: 'none',
-    border: '1px solid #ccc',
-    '&:hover': {
-      backgroundColor: 'white',
-      color: 'black',
-      boxShadow: 'none',
-    },
-    '&:active': {
-      backgroundColor: 'white',
-      color: 'black',
-      boxShadow: 'none',
-    },
-  }}
->
-  Download Report
-</Button>
-
-
+        variant="contained"
+        startIcon={<AssessmentOutlinedIcon />}
+        sx={{
+          backgroundColor: 'white',
+          color: 'black',
+          borderRadius: '10px',
+          textTransform: 'none',
+          boxShadow: 'none',
+          border: '1px solid #ccc',
+          fontWeight: 500,
+          '&:hover': {
+            backgroundColor: 'white',
+            color: 'black',
+            boxShadow: 'none',
+          },
+          '&:active': {
+            backgroundColor: 'white',
+            color: 'black',
+            boxShadow: 'none',
+          },
+        }}
+      >
+        Download Report
+      </Button>
     </Box>
   );
 };

@@ -35,9 +35,7 @@ const TabsFilter = ({ filter, setFilter }) => {
               color: 'white',
               backgroundColor: 'black',
             },
-            '&:hover': {
-              backgroundColor: '#f0f0f0',
-            },
+            
           }}
         />
       ))}
