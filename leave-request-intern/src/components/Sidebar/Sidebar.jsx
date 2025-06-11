@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, IconButton } from '@mui/material';
+import { Box, IconButton, Tooltip } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
@@ -18,7 +18,7 @@ const icons = [
   { icon: <MenuBookIcon />, label: 'Book' },
   { icon: <PersonIcon />, label: 'Profile' },
   { icon: <DescriptionIcon />, label: 'Documents' },
-  { icon: <HikingIcon />, label: 'Leave' }, // highlighted one
+  { icon: <HikingIcon />, label: 'Leave' }, // active by default
   { icon: <CampaignIcon />, label: 'Announcements' },
   { icon: <LocalHospitalIcon />, label: 'Health' },
   { icon: <AccountBalanceWalletIcon />, label: 'Wallet' },
@@ -27,7 +27,7 @@ const icons = [
 ];
 
 const Sidebar = () => {
-  const [activeIndex, setActiveIndex] = useState(5); // 6th icon is active
+  const [activeIndex, setActiveIndex] = useState(5); // 'Leave' active by default
 
   return (
     <Box
@@ -38,28 +38,30 @@ const Sidebar = () => {
         borderRight: '1px solid #e0e0e0',
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'top',
+        alignItems: 'center',
         py: 0,
       }}
     >
       {icons.map((item, index) => (
-        <IconButton
-          key={index}
-          onClick={() => setActiveIndex(index)}
-          sx={{
-            my: 0,
-            backgroundColor: index === activeIndex ? '#e0e7ff' : 'transparent',
-            color: '#444',
-            '&:hover': {
-              backgroundColor: '#e0e7ff',
-            },
-            borderRadius: '15px',
-            width: 48,
-            height: 48,
-          }}
-        >
-          {item.icon}
-        </IconButton>
+        <Tooltip title={item.label} placement="right" key={index}>
+          <IconButton
+            onClick={() => setActiveIndex(index)}
+            sx={{
+              m: '0px auto',
+              backgroundColor: index === activeIndex ? '#e0e7ff' : 'transparent',
+              color: index === activeIndex ? '#4338ca' : '#9ca3af',
+              '&:hover': {
+                backgroundColor: '#e0e7ff',
+              },
+              borderRadius: '20px',
+              width: 48,
+              height: 48,
+              transition: 'all 0.2s ease',
+            }}
+          >
+            {item.icon}
+          </IconButton>
+        </Tooltip>
       ))}
     </Box>
   );
