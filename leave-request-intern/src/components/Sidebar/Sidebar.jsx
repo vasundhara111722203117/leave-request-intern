@@ -3,7 +3,7 @@ import { Box, IconButton, Tooltip } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
-import PersonIcon from '@mui/icons-material/Person';
+import PersonIcon from '@mui/icons-material/Person'; 
 import DescriptionIcon from '@mui/icons-material/Description';
 import HikingIcon from '@mui/icons-material/Hiking';
 import CampaignIcon from '@mui/icons-material/Campaign';
@@ -18,7 +18,7 @@ const icons = [
   { icon: <MenuBookIcon />, label: 'Book' },
   { icon: <PersonIcon />, label: 'Profile' },
   { icon: <DescriptionIcon />, label: 'Documents' },
-  { icon: <HikingIcon />, label: 'Leave' }, // active by default
+  { icon: <HikingIcon />, label: 'Leave' }, // default active
   { icon: <CampaignIcon />, label: 'Announcements' },
   { icon: <LocalHospitalIcon />, label: 'Health' },
   { icon: <AccountBalanceWalletIcon />, label: 'Wallet' },
@@ -26,8 +26,13 @@ const icons = [
   { icon: <HelpOutlineIcon />, label: 'Help' },
 ];
 
-const Sidebar = () => {
-  const [activeIndex, setActiveIndex] = useState(5); // 'Leave' active by default
+const Sidebar = ({ setActivePage }) => {
+  const [activeIndex, setActiveIndex] = useState(5); // 'Leave' is default
+
+  const handleIconClick = (index, label) => {
+    setActiveIndex(index);
+    setActivePage(label); // Notify App of section change
+  };
 
   return (
     <Box
@@ -45,7 +50,7 @@ const Sidebar = () => {
       {icons.map((item, index) => (
         <Tooltip title={item.label} placement="right" key={index}>
           <IconButton
-            onClick={() => setActiveIndex(index)}
+            onClick={() => handleIconClick(index, item.label)}
             sx={{
               m: '0px auto',
               backgroundColor: index === activeIndex ? '#e0e7ff' : 'transparent',
