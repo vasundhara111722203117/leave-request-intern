@@ -1,256 +1,219 @@
-import React from "react";
+import React from 'react';
 import {
   Box,
   Typography,
-  Paper,
-  Divider,
+  Chip,
+  Card,
   Avatar,
+  Divider,
   Grid,
-  TextField,
-} from "@mui/material";
+  Stack,
+  Table,
+  TableBody,
+  TableCell,
+  TableRow,
+  TableContainer,
+  TableHead,
+  Paper,
+} from '@mui/material';
 
-import LightModeSharpIcon from "@mui/icons-material/LightModeSharp";
-import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-
-import { useParams } from "react-router-dom";
-
-import travelData from "../../data/travelData";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import EventIcon from '@mui/icons-material/Event';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import BusinessIcon from '@mui/icons-material/Business';
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import { useNavigate } from 'react-router-dom';
 
 const TravelDetailsPage = () => {
-  // Get the id from the route
-  const { id } = useParams();
-
-  // Find the matching travel by id
-  const travel = travelData.find((item) => item.id === id);
-
-  if (!travel) {
-    return <Typography>Travel not found</Typography>;
-  }
+  const navigate = useNavigate();
 
   return (
-    <Box sx={{ p: 3, backgroundColor: "#f5f6fa", minHeight: "100vh" }}>
+    <Box sx={{ p: 3, backgroundColor: '#f7f9fc', minHeight: '100vh' }}>
       {/* Header */}
-      <Box
-        display="flex"
-        justifyContent="space-between"
-        alignItems="center"
-        mb={2}
-      >
-        <Typography variant="h6" fontWeight="bold">
-          {travel.id}
-        </Typography>
-        <Box display="flex" alignItems="center" gap={1}>
-          <CheckCircleIcon
-            sx={{ color: travel.status === "Approved" ? "#2ecc71" : "#e74c3c" }}
-          />
-          <Typography
-            sx={{ backgroundColor: travel.status === "Approved" ? "#eafaf1" : "#fcecec", p: 1.5, borderRadius: 5 }}>
-            {travel.status}
-          </Typography>
-        </Box>
+      <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
+        <Stack direction="row" alignItems="center" spacing={1}>
+          <ArrowBackIcon sx={{ cursor: 'pointer' }} onClick={() => navigate(-1)} />
+          <Typography variant="h6" fontWeight="bold">Travel ID - 01</Typography>
+        </Stack>
+        <Chip
+          icon={<CheckCircleIcon sx={{ color: '#2ecc71' }} />}
+          label="Approved"
+          sx={{
+            backgroundColor: '#ffffff',
+            color: '#2ecc71',
+            fontWeight: 'bold',
+            borderRadius: '999px',
+          }}
+        />
       </Box>
 
-      {/* Main Section */}
-      <Grid container spacing={3}>
-        {/* Left Content */}
-        <Grid item xs={12} md={8}>
-          <Paper sx={{ p: 3, borderRadius: 3 }}>
-            <Typography variant="body2" color="primary" fontWeight="bold">
-              {travel.id}
+      <Grid container spacing={3} alignItems="flex-start">
+        {/* Main: University Travel Details */}
+        <Grid item xs ={12} width={'1000px'}>
+          <Card sx={{ borderRadius: 4, p: 2 }}>
+            <Chip label="Travel ID - 01" size="small" sx={{ backgroundColor: '#eef4ff', color: '#3b82f6', mb: 1 }} />
+            <Typography variant="h6" fontWeight="bold">London Carolivia University</Typography>
+            <Typography color="text.secondary" fontSize="0.9rem" mb={1}>
+              Going to discuss about HRMS mobile app functionalities & gathering requirements from the people.
             </Typography>
-            <Typography variant="h6" fontWeight="bold" mt={1}>
-              {travel.title}
-            </Typography>
-            <Typography sx={{ mt: 1 }}>
-              {travel.description}
-            </Typography>
-            <Typography variant="caption" color="text.secondary">
-              Requested on {travel.createdAt}
+            <Typography variant="caption" color="text.secondary" display="block" mb={3}>
+              Requested on 23 Oct 2024 at 04:30 PM
             </Typography>
 
-            <Divider sx={{ my: 2 }} />
+            <Typography variant="subtitle1" fontWeight="bold" mb={2}>
+              Travel details
+            </Typography>
 
-            {/* Travel Details */}
-            <Box>
-              <Typography fontWeight="bold">Travel details</Typography>
-              <Typography sx={{ mt: 1 }}>
-                <strong>Customer name: </strong> {travel.transport}
-              </Typography>
-              <Typography color="text.secondary" sx={{ mt: 1 }}>
-                Expected dates
-              </Typography>
-              <Typography>{travel.dates}</Typography>
+            <Stack spacing={2}>
+              <DetailRow icon={<BusinessIcon />} label="Customer name" value="Flyjac Logistics and Transporters" />
+              <DetailRow icon={<EventIcon />} label="Expected date of departure" value="19 Nov, 2024" />
+              <DetailRow icon={<EventIcon />} label="Expected date of arrival" value="23 Nov, 2024" />
+              <DetailRow icon={<AccessTimeIcon />} label="Expected duration days in count" value="5 days" />
+            </Stack>
 
-              <Typography color="text.secondary" sx={{ mt: 1 }}>
-                Duration
-              </Typography>
-              <Box display="flex" alignItems="center" gap={1}>
-                <LightModeSharpIcon sx={{ fontSize: 18 }} />
-                <Typography>{travel.duration}</Typography>
-              </Box>
-
-              <Box
-                sx={{ backgroundColor: "#e6edff", p: 1.5, mt: 2, borderRadius: 2 }}>
-                <Typography>
-                    <strong>Yes</strong> It’s billable to customer
-                </Typography>
-              </Box>
+            <Box mt={3} p={1.5} borderRadius="12px" bgcolor="#eef4ff" color="#1d4ed8" fontWeight="bold">
+              ✅ Yes, It’s billable to customer
             </Box>
-
-            {/* Expenses Details */}
-            <Box mt={4}>
-              <Typography fontWeight="bold" mb={1}>
-                Expenses details
-              </Typography>
-              <Paper variant="outlined" sx={{ overflowX: "auto" }}>
-                <Grid container spacing={2} p={2}>
-                    <Grid item xs={12} md={2}>
-                      <Typography fontSize={14} fontWeight="bold">
-                        Description
-                      </Typography>
-                      <TextField
-                        fullWidth
-                        variant="outlined"
-                        size="small"
-                        value={travel.description}
-                        disabled
-                      />
-                    </Grid>
-
-                    <Grid item xs={12} md={2}>
-                      <Typography fontSize={14} fontWeight="bold">
-                        Date
-                      </Typography>
-                      <TextField
-                        fullWidth
-                        variant="outlined"
-                        size="small"
-                        value={travel.createdAt}
-                        disabled
-                        InputProps={{ startAdornment: <CalendarTodayIcon fontSize="small" sx={{ mr: 1 }} /> }}
-                      />
-                    </Grid>
-
-                    <Grid item xs={12} md={2}>
-                      <Typography fontSize={14} fontWeight="bold">
-                        Ticket
-                      </Typography>
-                      <TextField
-                        fullWidth
-                        variant="outlined"
-                        size="small"
-                        value="₹ 25,000"
-                        disabled
-                      />
-                    </Grid>
-
-                    <Grid item xs={12} md={2}>
-                      <Typography fontSize={14} fontWeight="bold">
-                        Lodging
-                      </Typography>
-                      <TextField
-                        fullWidth
-                        variant="outlined"
-                        size="small"
-                        value="₹ 10,000"
-                        disabled
-                      />
-                    </Grid>
-
-                    <Grid item xs={12} md={2}>
-                      <Typography fontSize={14} fontWeight="bold">
-                        Boarding
-                      </Typography>
-                      <TextField
-                        fullWidth
-                        variant="outlined"
-                        size="small"
-                        value="₹ 5,000"
-                        disabled
-                      />
-                    </Grid>
-
-                    <Grid item xs={12} md={2}>
-                      <Typography fontSize={14} fontWeight="bold">
-                        Phone
-                      </Typography>
-                      <TextField
-                        fullWidth
-                        variant="outlined"
-                        size="small"
-                        value="₹ 5,000"
-                        disabled
-                      />
-                    </Grid>
-                </Grid>
-              </Paper>
-              <Typography textAlign="right" mt={2} fontWeight="bold">
-                Total amount : ₹ {travel.expense}
-              </Typography>
-            </Box>
-          </Paper>
+          </Card>
         </Grid>
 
-        {/* Right Content - Employee details */}
-        <Grid item xs={12} md={4}>
-          <Paper sx={{ p: 3, borderRadius: 3 }}>
-            <Typography fontWeight="bold" mb={2}>
-              Employee details
-            </Typography>
-            <Box
-              display="flex"
-              alignItems="center"
-              flexDirection="column"
-              mb={2}
-            >
-              <Avatar src="https://randomuser.me/api/portraits/men/75.jpg" sx={{ width: 64, height: 64 }} />
-              <Typography fontWeight="bold">Abilash Zibrahim</Typography>
-              <Typography variant="body2" color="text.secondary">
-                UX/UI Designer
-              </Typography>
-            </Box>
+        {/* Sidebar: Employee Details */}
+             {/* Employee Details */}
+        <Grid item xs={6} md={4} width={'510px'}>
+  <Card sx={{ p: 2, borderRadius: 4, height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'right' }}>
+    <Box>
+      <Typography variant="h6" mb={1}>Employee details</Typography>
+      <Box display="flex" flexDirection="column" alignItems="center">
+        <Avatar
+          src="https://randomuser.me/api/portraits/men/32.jpg"
+          sx={{ width: 72, height: 72 }}
+        />
+        <Typography mt={1} fontWeight="bold">Abilash Zibrahim</Typography>
+        <Typography color="text.secondary" variant="body2">UX/UI designer</Typography>
 
-            <Box display="flex" justifyContent="space-between" mb={2}>
-              <Box>
-                <Typography variant="body2" color="text.secondary">
-                    Travels
-                </Typography>
-                <Typography fontWeight="bold">
-                    27
-                </Typography>
-              </Box>
-              <Box>
-                <Typography variant="body2" color="text.secondary">
-                    Claimed amount
-                </Typography>
-                <Typography fontWeight="bold">
-                    ₹ 45,000
-                </Typography>
-              </Box>
-            </Box>
+        <Stack direction="row" spacing={3} mt={1}>
+          <Box
+            sx={{
+              backgroundColor: '#f4f4f5',
+              borderRadius: 6,
+              px: 6,
+              py: 1.5,
+              minWidth: 120,
+              textAlign: 'left',
+            }}
+          >
+            <Typography variant="caption" color="text.secondary" textAlign={'left'}>Travels</Typography>
+            <Typography variant="h6" fontWeight="bold" textAlign={'left'}>27</Typography>
+            
+          </Box>
+          <Box
+            sx={{
+              backgroundColor: '#f4f4f5',
+              borderRadius: 6,
+              px: 6,
+              py: 1,
+              minWidth: 150,
+              textAlign: 'left',
+            }}
+          >
+            <Typography variant="caption" color="text.secondary" textAlign={'left'}>Claimed amount</Typography>
+            <Typography variant="h6" fontWeight="bold" textAlign='left'>₹ 45,000</Typography>
+            
+          </Box>
+        </Stack>
+      </Box>
+    </Box>
 
-            <Divider />
+    <Divider sx={{ my: 3 }} />
 
-            <Typography mt={2} variant="body2" color="text.secondary">
-              Recent travel of you :-
-            </Typography>
-            <Paper variant="outlined" sx={{ p: 2, mt: 1, borderRadius: 2 }}>
-              <Typography variant="caption" color="primary" fontWeight="bold">
-                {travel.id}
-              </Typography>
-              <Typography fontWeight="bold">
-                {travel.title}
-              </Typography>
-              <Typography variant="body2">
-                {travel.description}
-              </Typography>
-            </Paper>
-          </Paper>
+    <Box>
+      <Typography variant="body2" color="text.secondary" mb={2}>
+        Recent travel of you:
+      </Typography>
+      <Card sx={{ p: 2, backgroundColor: '#f9fafb', borderRadius: 5 }}>
+        <Chip label="Travel ID - 01" size="small" sx={{ mb: 2, color: '#3b82f6' }} />
+        <Typography fontWeight="bold">London Carolivia University</Typography>
+        <Typography fontSize="0.85rem" color="text.secondary">
+          Going to discuss about HRMS mobile app functionalities & gathering requirements from the people.
+        </Typography>
+      </Card>
+    </Box>
+  </Card>
+</Grid>
+
+        {/* Expenses Table */}
+        <Grid item xs={12}>
+          <Box display="flex" justifyContent="space-between" alignItems="center" mb={1}>
+            <Typography fontWeight="bold">Expenses details</Typography>
+            <Typography fontWeight="bold">Total amount: ₹ 45,000</Typography>
+          </Box>
+
+          <Card sx={{ borderRadius: 4, overflow: 'hidden' }}>
+            <TableContainer component={Paper} elevation={0}>
+              <Table sx={{ width: '100%', tableLayout: 'fixed' }}>
+                <TableHead sx={{ backgroundColor: '#eef4ff' }}>
+                  <TableRow>
+                    {['Description', 'Date', 'Ticket', 'Lodging', 'Boarding', 'Phone'].map((header, idx) => (
+                      <TableCell key={idx} sx={{ fontWeight: 'bold' }}>{header}</TableCell>
+                    ))}
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  <TableRow>
+                    <TableCell><Box sx={boxStyle}>Sample data</Box></TableCell>
+                    <TableCell>
+                      <Box sx={{ ...boxStyle, display: 'flex', alignItems: 'center', gap: 13 }}>
+                        12-09-2024 <CalendarTodayIcon fontSize="small" sx={{ color: 'black' }} />
+                      </Box>
+                    </TableCell>
+                    {[...Array(4)].map((_, idx) => (
+                      <TableCell key={idx}><Box sx={boxStyle}>₹ 25,000</Box></TableCell>
+                    ))}
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Card>
         </Grid>
       </Grid>
     </Box>
   );
+};
+
+// Reusable Detail Row
+const DetailRow = ({ icon, label, value }) => (
+  <Box display="flex" alignItems="flex-start" gap={2}>
+    {React.cloneElement(icon, { color: 'action', sx: { mt: '3px' } })}
+    <Box>
+      <Typography variant="body2" color="text.secondary">{label}</Typography>
+      <Typography variant="body1" fontWeight="bold">{value}</Typography>
+    </Box>
+  </Box>
+);
+
+// Reusable InfoBox
+const InfoBox = ({ label, value }) => (
+  <Box
+    sx={{
+      backgroundColor: '#f4f4f5',
+      borderRadius: 2,
+      px: 2,
+      py: 1.5,
+      minWidth: 100,
+      textAlign: 'center',
+    }}
+  >
+    <Typography variant="caption" color="text.secondary">{label}</Typography>
+    <Typography variant="h6" fontWeight="bold">{value}</Typography>
+  </Box>
+);
+
+const boxStyle = {
+  backgroundColor: '#ffffff',
+  border: '1px solid #e0e0e0',
+  borderRadius: '6px',
+  padding: '8px 12px',
 };
 
 export default TravelDetailsPage;
