@@ -72,7 +72,7 @@ const TravelDetailsPage = () => {
               <DetailRow icon={<AccessTimeIcon />} label="Expected duration days in count" value="5 days" />
             </Stack>
 
-            <Box mt={3} p={1.5} borderRadius="12px" bgcolor="#eef4ff" color="#1d4ed8" fontWeight="bold">
+            <Box mt={3} p={1.5} borderRadius="12px" bgcolor="#eef4ff" color="#000000" fontWeight="bold">
               ✅ Yes, It’s billable to customer
             </Box>
           </Card>
