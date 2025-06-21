@@ -11,13 +11,14 @@ import EventIcon from '@mui/icons-material/Event';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 const statusStyles = {
   Approved: {
     label: 'Approved',
     color: '#2ecc71',
     bg: '#dcfce7',
-    icon: '✔️',
+    icon: <CheckCircleIcon sx={{ color: '#2ecc71', fontSize: 16 }} />, // Green tick icon
   },
   Rejected: {
     label: 'Rejected',
@@ -45,8 +46,9 @@ const TravelCards = ({ item, onCardClick }) => {
           p: 3,
           mb: 2,
           display: 'flex',
+          flexDirection: { xs: 'column', md: 'row' },
           justifyContent: 'space-between',
-          flexWrap: 'wrap',
+          gap: { xs: 2, md: 0 },
           boxShadow: '0 1px 4px rgba(0,0,0,0.05)',
           cursor: 'pointer',
           transition: 'transform 0.2s, box-shadow 0.2s',
@@ -74,29 +76,29 @@ const TravelCards = ({ item, onCardClick }) => {
             direction="row"
             spacing={2}
             alignItems="center"
-            sx={{ mt: 1, flexWrap: 'wrap' }}
+            sx={{ mt: 1, flexWrap: 'wrap', gap: 1.5 }}
           >
             <Box display="flex" alignItems="center" gap={0.5}>
-              <LocalShippingIcon fontSize="small" />
+              <LocalShippingIcon fontSize="small" sx={{ mb: '1px' }} />
               <Typography variant="caption">{item.transport}</Typography>
             </Box>
             <Box display="flex" alignItems="center" gap={0.5}>
-              <MonetizationOnIcon fontSize="small" />
+              <MonetizationOnIcon fontSize="small" sx={{ mb: '1px' }} />
               <Typography variant="caption">Billable</Typography>
             </Box>
             <Box display="flex" alignItems="center" gap={0.5}>
-              <EventIcon fontSize="small" />
+              <EventIcon fontSize="small" sx={{ mb: '1px' }} />
               <Typography variant="caption">{item.dates}</Typography>
             </Box>
             <Box display="flex" alignItems="center" gap={0.5}>
-              <AccessTimeIcon fontSize="small" />
+              <AccessTimeIcon fontSize="small" sx={{ mb: '1px' }} />
               <Typography variant="caption">{item.duration}</Typography>
             </Box>
           </Stack>
         </Box>
 
         {/* Right Section */}
-        <Box textAlign="right" sx={{ mt: { xs: 2, md: 0 } }}>
+        <Box textAlign={{ xs: 'left', md: 'right' }}>
           <Typography variant="caption" color="text.secondary">
             Travel expense:
           </Typography>

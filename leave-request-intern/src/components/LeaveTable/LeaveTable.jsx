@@ -1,6 +1,14 @@
 import React from 'react';
 import {
-  Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Box
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Box,
+  Typography
 } from '@mui/material';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
@@ -33,12 +41,20 @@ const LeaveTable = ({ filter, data }) => {
         backgroundColor: '#ffffff',
         borderRadius: '12px',
         boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
-        padding: '24px',
-        margin: '16px 0'
+        padding: { xs: '16px', sm: '24px' },
+        margin: '16px 0',
+        overflowX: 'auto'
       }}
     >
-      <TableContainer component={Paper} sx={{ boxShadow: 'none' }}>
-        <Table>
+      <TableContainer
+        component={Paper}
+        sx={{
+          boxShadow: 'none',
+          width: '100%',
+          overflowX: 'auto'
+        }}
+      >
+        <Table sx={{ minWidth: 600 }}>
           <TableHead>
             <TableRow>
               {['Leave Type', 'From', 'To', 'Leave Time', 'Half Leave Type', 'Status'].map((heading) => (
@@ -50,7 +66,8 @@ const LeaveTable = ({ filter, data }) => {
                     backgroundColor: '#f5f5f5',
                     borderBottom: '2px solid #e0e0e0',
                     py: 2,
-                    fontSize: '0.875rem'
+                    fontSize: { xs: '0.75rem', sm: '0.875rem' },
+                    whiteSpace: 'nowrap'
                   }}
                 >
                   {heading}
@@ -73,15 +90,21 @@ const LeaveTable = ({ filter, data }) => {
                       sx={{
                         display: 'inline-flex',
                         alignItems: 'center',
-                        gap: '10px',
+                        gap: '8px',
                         backgroundColor: status.bgColor,
-                        padding: '8px 12px',
+                        padding: '6px 10px',
                         borderRadius: '8px',
                         fontWeight: '500',
+                        whiteSpace: 'nowrap'
                       }}
                     >
                       {status.icon}
-                      <span style={{ color: status.color }}>{row.status}</span>
+                      <Typography
+                        variant="body2"
+                        sx={{ color: status.color, fontSize: { xs: '0.75rem', sm: '0.875rem' } }}
+                      >
+                        {row.status}
+                      </Typography>
                     </Box>
                   </TableCell>
                 </TableRow>

@@ -9,7 +9,7 @@ import {
 import SearchIcon from '@mui/icons-material/Search';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import TabsFilter from './TabsFilter/TabsFilter'; // TravelRequest-specific TabsFilter
+import TabsFilter from './TabsFilter/TabsFilter';
 
 const SearchPagination = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -29,17 +29,29 @@ const SearchPagination = () => {
     <Box
       sx={{
         display: 'flex',
+        flexDirection: { xs: 'column', sm: 'row' },
         justifyContent: 'space-between',
-        alignItems: 'center',
+        alignItems: { xs: 'flex-start', sm: 'center' },
         flexWrap: 'wrap',
+        gap: 2,
         mb: 2,
       }}
     >
-      {/* Travel-specific TabsFilter */}
+      {/* TabsFilter (top on mobile, left on desktop) */}
       <TabsFilter filter={filter} setFilter={setFilter} />
 
       {/* Right controls */}
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          flexWrap: 'nowrap',
+          gap: { xs: 1, sm: 2 },
+          width: { xs: '100%', sm: 'auto' },
+          justifyContent: { xs: 'flex-start', sm: 'flex-end' },
+          overflowX: 'auto',
+        }}
+      >
         <TextField
           placeholder="Search"
           variant="outlined"
@@ -60,41 +72,76 @@ const SearchPagination = () => {
               },
             },
           }}
+          sx={{
+            minWidth: { xs: '100%', sm: 380 },
+            maxWidth: 380,
+          }}
         />
 
-        <Typography variant="body2" sx={{ minWidth: '40px', textAlign: 'center' }}>
-          {String(page).padStart(2, '0')} of {totalPages}
-        </Typography>
-
-        <IconButton
-          onClick={handleBack}
+        {/* Page number and navigation arrows */}
+        <Box
           sx={{
-            backgroundColor: '#ffffff',
-            borderRadius: '50%',
-            width: 36,
-            height: 36,
-            '&:hover': {
-              backgroundColor: '#f0f0f0',
-            },
+            display: 'flex',
+            alignItems: 'center',
+            gap: 0.5,
           }}
         >
-          <ArrowBackIosIcon fontSize="small" />
-        </IconButton>
+          {/* Mobile: 01-30 */}
+          <Typography
+            variant="body2"
+            sx={{
+              display: { xs: 'block', sm: 'none' },
+              minWidth: '50px',
+              textAlign: 'center',
+            }}
+          >
+            {String(page).padStart(2, '0')}-{totalPages}
+          </Typography>
 
-        <IconButton
-          onClick={handleNext}
-          sx={{
-            backgroundColor: '#ffffff',
-            borderRadius: '50%',
-            width: 36,
-            height: 36,
-            '&:hover': {
-              backgroundColor: '#f0f0f0',
-            },
-          }}
-        >
-          <ArrowForwardIosIcon fontSize="small" />
-        </IconButton>
+          {/* Desktop: 01 of 30 */}
+          <Typography
+            variant="body2"
+            sx={{
+              display: { xs: 'none', sm: 'block' },
+              minWidth: '50px',
+              textAlign: 'center',
+            }}
+          >
+            {String(page).padStart(2, '0')} of {totalPages}
+          </Typography>
+
+          <IconButton
+            onClick={handleBack}
+            sx={{
+              backgroundColor: '#ffffff',
+              borderRadius: '50%',
+              width: 30,
+              height: 30,
+              p: 0,
+              '&:hover': {
+                backgroundColor: '#f0f0f0',
+              },
+            }}
+          >
+            <ArrowBackIosIcon fontSize="small" />
+          </IconButton>
+
+          <IconButton
+            onClick={handleNext}
+            sx={{
+              backgroundColor: '#ffffff',
+              borderRadius: '50%',
+              width: 30,
+              height: 30,
+              p: 0,
+              '&:hover': {
+                backgroundColor: '#f0f0f0',
+              },
+            }}
+          >
+            <ArrowForwardIosIcon fontSize="small" />
+          </IconButton>
+        </Box>
       </Box>
     </Box>
   );

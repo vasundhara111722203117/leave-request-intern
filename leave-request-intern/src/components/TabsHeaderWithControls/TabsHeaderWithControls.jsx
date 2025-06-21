@@ -33,19 +33,38 @@ const TabsHeaderWithControls = ({ filter, setFilter }) => {
 
   return (
     <Box
-      sx={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        flexWrap: 'wrap',
-        mb: 2,
-      }}
-    >
+  sx={{
+    display: 'flex',
+    justifyContent: 'space-between',
+    flexWrap: 'wrap',
+    rowGap: 1,
+    columnGap: 2,
+    mb: 2,
+    alignItems: 'flex-start',
+    '@media (max-width: 600px)': {
+      flexDirection: 'column',
+      alignItems: 'stretch',
+    },
+  }}
+>
+
       {/* Tabs section */}
-      <TabsFilter filter={filter} setFilter={setFilter} />
+      <Box sx={{ flexGrow: 1 }}>
+        <TabsFilter filter={filter} setFilter={setFilter} />
+      </Box>
 
       {/* Right-side controls */}
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+      <Box
+        sx={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          alignItems: 'center',
+          gap: 1.5,
+          '@media (max-width: 600px)': {
+            justifyContent: 'space-between',
+          },
+        }}
+      >
         {/* Search input */}
         <TextField
           placeholder="Search"
@@ -71,7 +90,6 @@ const TabsHeaderWithControls = ({ filter, setFilter }) => {
 
         {/* Month selector */}
         <TextField
-        
           select
           value={selectedMonth}
           onChange={(e) => setSelectedMonth(e.target.value)}
@@ -96,12 +114,15 @@ const TabsHeaderWithControls = ({ filter, setFilter }) => {
           ))}
         </TextField>
 
-        {/* Page indicator */}
-        <Typography variant="body2" sx={{ minWidth: '40px', textAlign: 'center' }}>
+        {/* Page number */}
+        <Typography
+          variant="body2"
+          sx={{ minWidth: '40px', textAlign: 'center' }}
+        >
           {String(page).padStart(2, '0')} of {totalPages}
         </Typography>
 
-        {/* Left and right scroll arrows with same white circular style */}
+        {/* Navigation arrows */}
         <IconButton
           onClick={handleBack}
           sx={{

@@ -47,56 +47,84 @@ function AddNewTravelRequest() {
   };
 
   return (
-    <Box p={0} sx={{ background: "#f5f6fa", minHeight: "50vh" }}>
-      {/* Top section with arrow back, title, cancel, save */}
-      <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", mb: 4 }}>
-        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-          <IconButton color="inherit" onClick={handleBack}>
-            <ArrowBackIcon />
-          </IconButton>
-          <Typography variant="h6">New Task</Typography>
-        </Box>
+    // ...all imports remain unchanged
+// inside return
+<Box p={0} sx={{ background: "#f5f6fa", minHeight: "50vh" }}>
 
-        <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-          <Button
-            variant="contained"
-            color="secondary"
-            onClick={handleCancel}
-            sx={{ borderRadius: "10px", color: "black", background: "#fff" }}
-          >
-            Cancel
-          </Button>
-          <Button variant="contained" color="primary" onClick={handleSave} sx={{ borderRadius: "10px" }}>
-            Save
-          </Button>
-        </Box>
-      </Box>
+  {/* ✅ Top section with back arrow, title, cancel, save (responsive) */}
+  <Box
+    sx={{
+      display: "flex",
+      flexDirection: { xs: "column", sm: "row" },
+      justifyContent: "space-between",
+      alignItems: { xs: "flex-start", sm: "center" },
+      gap: 2,
+      mb: 2,
+    }}
+  >
+    {/* Left: Back icon + New Task title */}
+    <Box sx={{ display: "flex", alignItems: "center", gap: 0 }}>
+      <IconButton color="inherit" onClick={handleBack}>
+        <ArrowBackIcon />
+      </IconButton>
+      <Typography variant="h6">New Task</Typography>
+    </Box>
+
+    {/* Right: Cancel + Save buttons */}
+    <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+      <Button
+        variant="contained"
+        color="secondary"
+        onClick={handleCancel}
+        sx={{ borderRadius: "10px", color: "black", background: "#fff" }}
+      >
+        Cancel
+      </Button>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={handleSave}
+        sx={{ borderRadius: "10px" }}
+      >
+        Save
+      </Button>
+    </Box>
+  </Box>
+
+  {/* ✅ Rest of your code remains unchanged */}
+
 
       {/* Box with form details */}
       <Box
         sx={{
-          borderRadius: "15px",
+          borderRadius: "20px",
           padding: "15px",
           background: "#ffffff",
           boxShadow: "0px 0px 5px #00000020"
         }}
       >
-        <Typography variant="h6" color="black" sx={{ mb: 1 }}>
+        <Typography variant="h6" color="black" sx={{ mb: 1 }} >
           Add new travel request
         </Typography>
         <Typography variant="body1" color="black" sx={{ mb: 2 }}>
           Enter the below details manually to create a new travel request
         </Typography>
 
-        <Box
-          sx={{
-            display: "grid",
-            gridTemplateColumns: "0.3fr 0.3fr",
-            gap: "12px",
-            borderRadius: "20px",
-            mb: 1
-          }}
-        >
+       <Box
+  sx={{
+    display: "grid",
+    gridTemplateColumns: {
+      xs: "1fr",
+      sm: "1fr",
+      md: "0.3fr 0.3fr" // Two columns on desktop, not full width
+    },
+    gap: "12px",
+    borderRadius: "20px",
+    mb: 1,
+  }}
+>
+
+
           {/* Employee ID */}
 <Box>
   <InputLabel>Employee ID</InputLabel>

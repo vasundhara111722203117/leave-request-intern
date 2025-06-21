@@ -49,6 +49,7 @@ const TravelSummaryCards = () => {
         display: 'flex',
         flexWrap: 'wrap',
         gap: 2,
+        justifyContent: { xs: 'center', md: 'flex-start' },
         mb: 3,
       }}
     >
@@ -56,11 +57,11 @@ const TravelSummaryCards = () => {
         <Card
           key={index}
           sx={{
-            flex: '1 1 250px',
+            flex: '1 1 240px',
             p: 2,
             display: 'flex',
             alignItems: 'center',
-            minWidth: '230px',
+            minWidth: '220px',
             maxWidth: '280px',
             height: '110px',
             backgroundColor: '#fff',
@@ -70,9 +71,39 @@ const TravelSummaryCards = () => {
         >
           <Box sx={{ mr: 2 }}>{card.icon}</Box>
           <Box>
-            <Typography variant="subtitle2" fontWeight="bold" sx={{ fontSize: 14 }}>
-              {card.title}
-            </Typography>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+              <Typography variant="subtitle2" fontWeight="bold" sx={{ fontSize: 14 }}>
+                {card.title}
+              </Typography>
+              {card.title === 'Approved' && (
+                <Box
+                  component="span"
+                  sx={{
+                    width: 18,
+                    height: 18,
+                    borderRadius: '50%',
+                    backgroundColor: '#22c55e',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="12"
+                    height="12"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#fff"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                </Box>
+              )}
+            </Box>
             <Typography variant="h6" fontWeight="bold" sx={{ fontSize: 18 }}>
               {card.value}
             </Typography>

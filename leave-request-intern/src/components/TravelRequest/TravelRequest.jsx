@@ -4,7 +4,6 @@ import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import TravelOverviewCards from './TravelOverviewCards';
 import TravelList from './TravelList';
 
-
 const TravelRequest = ({ onAddNew }) => {
   return (
     <Box sx={{ p: 3, backgroundColor: '#f5f6fa', minHeight: '100vh' }}>
@@ -34,8 +33,7 @@ const TravelRequest = ({ onAddNew }) => {
             },
           }}
           onClick={() => {
-            alert('Download report clicked!');
-            // Optionally trigger download logic here
+            // Intentionally left blank — no alert or download
           }}
         >
           Download Report

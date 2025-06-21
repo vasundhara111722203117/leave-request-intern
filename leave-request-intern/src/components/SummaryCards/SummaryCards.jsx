@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography, Button } from '@mui/material';
+import { Box, Typography, Button, Grid } from '@mui/material';
 import SummaryHeader from './SummaryHeader';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import BadgeIcon from '@mui/icons-material/Badge';
@@ -8,12 +8,19 @@ const SummaryCards = () => {
   return (
     <Box>
       <SummaryHeader />
-      <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
 
+      <Box
+        sx={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: 2,
+          justifyContent: 'center', // center on mobile
+        }}
+      >
         {/* Total Summary */}
         <Box
           sx={{
-            width: 420,
+            width: { xs: '100%', sm: 300, md: 420 },
             height: 170,
             p: 2,
             borderRadius: 3,
@@ -42,9 +49,9 @@ const SummaryCards = () => {
         {/* Leave Type Summary */}
         <Box
           sx={{
-            width: 600,
-            height: 170,
-            p: 2,
+            width: { xs: '100%', sm: 360, md: 600 },
+            height: 'auto',
+            p: 1,
             borderRadius: 3,
             backgroundColor: '#fff',
           }}
@@ -55,23 +62,25 @@ const SummaryCards = () => {
               Leave type summary
             </Typography>
           </Box>
-          <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+          <Grid container spacing={8}>
             {['Sick leave', 'Casual leave', 'Compensation', 'Permissions'].map((label, i) => (
-              <Box key={i} sx={{ textAlign: 'left' }}>
-                <Typography fontSize="0.8rem" color="text.secondary">{label}</Typography>
-                <Typography fontWeight="bold" fontSize="1.1rem">67</Typography>
-                <Typography sx={{ color: 'green', fontSize: '0.7rem' }}>
-                  +23 vs last month
-                </Typography>
-              </Box>
+              <Grid item xs={6} key={i}>
+                <Box sx={{ textAlign: 'left' }}>
+                  <Typography fontSize="0.8rem" color="text.secondary">{label}</Typography>
+                  <Typography fontWeight="bold" fontSize="1.1rem">67</Typography>
+                  <Typography sx={{ color: 'green', fontSize: '0.7rem' }}>
+                    +23 vs last month
+                  </Typography>
+                </Box>
+              </Grid>
             ))}
-          </Box>
+          </Grid>
         </Box>
 
         {/* Leave Request */}
         <Box
           sx={{
-            width: 510,
+            width: { xs: '100%', sm: 340, md: 510 },
             height: 170,
             p: 2,
             borderRadius: 3,
@@ -88,22 +97,22 @@ const SummaryCards = () => {
               Request new leave for an approval
             </Typography>
             <Button
-  variant="contained"
-  sx={{
-    mt: 1.5,
-    borderRadius: '10px',
-    textTransform: 'none',
-    backgroundColor: '#0511f2', // dark blue
-    '&:hover': {
-      backgroundColor: '#0000ec', // slightly darker on hover
-    },
-  }}
->
-  + Add new
-</Button>
-
+              variant="contained"
+              sx={{
+                mt: 1.5,
+                borderRadius: '10px',
+                textTransform: 'none',
+                backgroundColor: '#0511f2',
+                '&:hover': {
+                  backgroundColor: '#0000ec',
+                },
+              }}
+            >
+              + Add new
+            </Button>
           </Box>
-          {/* Image placed outside the card */}
+
+          {/* Image */}
           <Box
             component="img"
             src="leave image.jpg"
@@ -112,12 +121,11 @@ const SummaryCards = () => {
               position: 'absolute',
               right: 20,
               bottom: 20,
-              width: 220,
-              height: 120,
+              width: { xs: 120, sm: 180, md: 220 },
+              height: 'auto',
             }}
           />
         </Box>
-
       </Box>
     </Box>
   );
